@@ -1,4 +1,4 @@
-# Astro Starter Kit: Basics
+# Astro Project with Server Islands 🚀
 
 ```sh
 pnpm create astro@latest -- --template basics

@@ -1,8 +1,9 @@
 ---
+import "../styles/global.css";
 import Layout from "../layouts/Layout.astro";
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import { getCollection } from "astro:content";
+const books = await getCollection("books");
+export const prerender = true;
 ---
 
 <Layout title="Dev Books">
@@ -10,5 +11,40 @@ import Layout from "../layouts/Layout.astro";
     <h1 class="text-center text-7xl font-extrabold">
       Dev 👨🏼‍💻<span class="block">Books</span>
     </h1>
+    <section
+      class="w-full m-0"
+      aria-label="Libros recomendados para programadores"
+    >
+      <div>
+        <div class="mt-10 min-w-96 lg:grid lg:grid-cols-2 lg:gap-6">
+          {
+            books.map((book: any) => {
+              const { slug, data } = book;
+              const { title, author, img, description, readtime, buy } = data;
+              return (
+                <article class="mb-10 flex gap-6 rounded-lg bg-white/10 p-6 md:grid-cols-2">
+                  <a href={`/libro/${slug}`} class="transition hover:scale-110">
+                    <img
+                      transition:name={`img-${slug}`}
+                      src={`/${img}`}
+                      alt={`Portada del libro ${title} de ${author}`}
+                      class="h-36 min-w-24 flex-nowrap rounded-md object-cover"
+                    />
+                  </a>
+                  <div>
+                    <h2 class="text-2xl font-bold">{title}</h2>
+                    <p class="mb-2 text-sm italic text-gray-300">by {author}</p>
+                    <p class="mb-2 text-gray-200">{description}</p>
+                    <small class="block mt-2 text-sm text-gray-400">
+                      ⏱️ de lectura: {readtime} minutos
+                    </small>
+                  </div>
+                </article>
+              );
+            })
+          }
+        </div>
+      </div>
+    </section>
   </main>
 </Layout>

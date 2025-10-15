@@ -1,9 +1,5 @@
 # Astro Project with Server Islands 🚀
 
-```sh
-pnpm create astro@latest -- --template basics
-```
-
 > This is hobby project made it to show the use of astro framework with server islands. The project is deployed in vercel
 > You can check it out here: <https://dev-books-beta.vercel.app/>
 

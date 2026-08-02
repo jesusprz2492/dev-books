@@ -9,29 +9,29 @@ export async function getStaticPaths() {
   const books = await getCollection("books");
 
   return books.map((book) => ({
-    params: { id: book.slug },
+    params: { id: book.id },
     props: { book },
   }));
 }
 
 const { book } = Astro.props;
-const { data, slug } = book;
+const { data, id } = book;
 const { title, img, buy } = data;
 const { Content } = await render(book);
 export const prerender = true;
 ---
 
-<Layout title=`${slug} -> Dev books`>
+<Layout title=`${id} -> Dev books`>
   <div class="flex gap-12">
     <aside class="flex flex-col gap-4 items-center">
       <a href="/" class="hover:underline opacity-70"> ← Volver atrás </a>
       <img
-        transition:name={`img-${slug}`}
+        transition:name={`img-${id}`}
         class="mb-0.5 w-96 rounded-lg"
         src=`/${img}`
         alt={`Cover image for ${title}`}
       />
-      <BookScore server:defer id={slug}>
+      <BookScore server:defer id={id}>
         <span slot="fallback" class="text-xs opacity-70"
           >Cargando puntuación...</span
         >

@@ -18,14 +18,14 @@ export const prerender = true;
       <div>
         <div class="mt-10 min-w-96 lg:grid lg:grid-cols-2 lg:gap-6">
           {
-            books.map((book: any) => {
-              const { slug, data } = book;
+            books.map((book) => {
+              const { id, data } = book;
               const { title, author, img, description, readtime } = data;
               return (
                 <article class="mb-10 flex gap-6 rounded-lg bg-white/10 p-6 md:grid-cols-2">
-                  <a href={`/libro/${slug}`} class="transition hover:scale-110">
+                  <a href={`/libro/${id}`} class="transition hover:scale-110">
                     <img
-                      transition:name={`img-${slug}`}
+                      transition:name={`img-${id}`}
                       src={`/${img}`}
                       alt={`Portada del libro ${title} de ${author}`}
                       class="h-36 min-w-24 flex-nowrap rounded-md object-cover"

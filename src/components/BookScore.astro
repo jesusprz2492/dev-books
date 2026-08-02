@@ -1,0 +1,18 @@
+---
+import { SCORE_API_ENDPOINT } from "astro:env/server"; 
+
+let scoreValue: string | null = null;
+
+if (SCORE_API_ENDPOINT) {
+  try {
+    const response = await fetch(SCORE_API_ENDPOINT);
+    if (response.ok) scoreValue = (await response.text()).trim();
+  } catch {
+    scoreValue = null;
+  }
+}
+---
+
+<span class="text-xs" id="score">
+  {scoreValue ? `⭐ Puntuación: ${scoreValue}/5` : "Puntuación no disponible"}
+</span>
